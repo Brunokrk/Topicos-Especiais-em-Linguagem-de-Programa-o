@@ -2,7 +2,7 @@ data Tree a = Node a (Tree a) (Tree a) | Leaf deriving Show
 
 ins e Leaf = Node e Leaf Leaf
 ins e n@(Node x l r)
-    | e == x = n
+    | e == x = n --retorna a arvore atual (Duplicates shall not pass)
     | e < x = Node x (ins e l) r
     | e > x = Node x l (ins e r)
 
