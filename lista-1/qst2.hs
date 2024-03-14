@@ -13,6 +13,7 @@ data RBTree a = LeafRB | Node a RB (RBTree a) (RBTree a) deriving Show
 insertRB :: (Ord a) => a -> RBTree a -> RBTree a
 insertRB x s = makeBlack (ins s) -- insere um valor x na árvore s com função auxiliar (ins s)
   where
+    -- escopo
     -- raiz  preta
     makeBlack (Node y R a b) = Node y B a b
     makeBlack s = s
@@ -24,7 +25,7 @@ insertRB x s = makeBlack (ins s) -- insere um valor x na árvore s com função 
       | x > y     = balance y c a (ins b)
       | otherwise = Node y c a b
 
-    -- Rebalanceamento da árvore
+    -- Rebalanceamento da árvore - Casos
     balance :: a -> RB -> RBTree a -> RBTree a -> RBTree a
     balance z B (Node y R (Node x R a b) c) d = Node y R (Node x B a b) (Node z B c d)
     balance z B (Node x R a (Node y R b c)) d = Node y R (Node x B a b) (Node z B c d)
@@ -46,8 +47,8 @@ printRBTree tree = putStr (treeToString 0 tree)
 main :: IO ()
 main = do
     let emptyTree = LeafRB
-        valuesToInsert = [3, 5, 10]  -- Lista de valores a serem inseridos.
-        populatedTree = foldr insertRB emptyTree valuesToInsert  -- Insere os valores na árvore.
+        valuesToInsert = [3, 5, 10] 
+        populatedTree = foldr insertRB emptyTree valuesToInsert  
 
     printRBTree populatedTree
     print(populatedTree)
