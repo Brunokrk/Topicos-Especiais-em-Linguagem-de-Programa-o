@@ -1,8 +1,10 @@
+--Nome: Bruno Marchi Pires
+--Questão 1
 data Tree a = Node a (Tree a) (Tree a) | Leaf deriving Show
 
 ins e Leaf = Node e Leaf Leaf
 ins e n@(Node x l r)
-    | e == x = n --retorna a arvore atual (Duplicates shall not pass)
+    | e == x = n --retorna a arvore atual (Duplicates shall not pass), Também existem abordagens que permitem valores repetidos, nesse caso seria feito com a utilzação de um contador contando as ocorrências :)
     | e < x = Node x (ins e l) r
     | e > x = Node x l (ins e r)
 
@@ -21,14 +23,14 @@ removeNode (Node _ l r) =  -- tem dois filhos... F
   let (minNode, newRight) = extractMin r
   in Node minNode l newRight
 
--- Função auxiliar para extrair o menor nó da subárvore direita e retorná-lo
--- junto com a nova subárvore direita sem o menor nó.
 extractMin :: (Ord a) => Tree a -> (a, Tree a)
 extractMin (Node x Leaf r) = (x, r)
 extractMin (Node x l r) =
   let (minNode, newLeft) = extractMin l
   in (minNode, Node x newLeft r)
 
+
+--Printando estrutura Final para teste
 printTree :: (Show a) => Tree a -> IO ()
 printTree tree = putStr (treeToString 0 tree)
   where

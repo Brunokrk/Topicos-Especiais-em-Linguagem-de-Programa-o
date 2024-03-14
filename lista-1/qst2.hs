@@ -1,3 +1,5 @@
+--Nome: Bruno Marchi Pires
+
 --I.Todo nó e vermelho ou preto.
 --II.As folhas são pretas.
 --III.Se um nó e vermelho seus filhos devem ser pretos.
